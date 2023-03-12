@@ -16,9 +16,9 @@
             MySQL : org.hibernate.dialect.MySQL5InnoDBDialect
             -->
             <!-- 옵션 -->
-            <property name="hibernate.show_sql" value="true"/>  <!-- 쿼리 노출-->
-            <property name="hibernate.format_sql" value="true"/> <!-- 쿼리 포맷 -->
-            <property name="hibernate.use_sql_comments" value="true"/> <!-- 쿼리 상단에 커맨드 노출 -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
         </properties>
     </persistence-unit>
