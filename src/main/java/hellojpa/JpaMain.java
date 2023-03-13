@@ -26,7 +26,8 @@ public class JpaMain {
             //extractedV2(em);
             //extractedV3(em);
             //extractedV4(em);
-            extractedV5(em);
+            //extractedV5(em);
+            entityMapping(em);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -34,6 +35,13 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    // 엔티티 매핑
+    private static void entityMapping(EntityManager em) {
+
+        BMember member = em.find(BMember.class, 150L);
+        member.setName("A2222AAAA");
     }
 
     // 준영속
