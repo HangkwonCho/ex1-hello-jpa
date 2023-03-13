@@ -25,7 +25,8 @@ public class JpaMain {
             //extractedV1(em);
             //extractedV2(em);
             //extractedV3(em);
-            extractedV4(em);
+            //extractedV4(em);
+            extractedV5(em);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -33,6 +34,22 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    // 준영속
+    private static void extractedV5(EntityManager em) {
+
+        // 영속
+        BMember member = em.find(BMember.class, 150L);
+        member.setName("A2222AAAA");
+
+        // 준영속
+        // em.detach(member);
+        // em.clear();
+        // em.close();
+        // BMember member2 = em.find(BMember.class, 150L);
+
+        System.out.println("=======================");
     }
 
     private static void extractedV4(EntityManager em) {
