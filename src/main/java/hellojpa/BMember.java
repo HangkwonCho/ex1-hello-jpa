@@ -10,6 +10,14 @@ public class BMember {
     private Long id;
     private String name;
 
+    public BMember() {
+    }
+
+    public BMember(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
