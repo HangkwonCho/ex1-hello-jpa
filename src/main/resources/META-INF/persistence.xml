@@ -20,7 +20,7 @@
             <property name="hibernate.format_sql" value="true"/> <!-- 쿼리 포맷 -->
             <property name="hibernate.use_sql_comments" value="true"/> <!-- 쿼리 상단에 커맨드 노출 -->
             <property name="hibernate.jdbc.batch_size" value="10"/> <!-- transaction 처리 전 최대 담을수 있는 개수, 버퍼링을 모아서 write -->
-            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <!--
             운영 장비에는 절대 create, create-drop, update 사용하면 안됨.
             개발 초기 단계 : create or update

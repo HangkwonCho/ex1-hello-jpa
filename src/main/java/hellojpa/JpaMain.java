@@ -27,7 +27,8 @@ public class JpaMain {
             //extractedV3(em);
             //extractedV4(em);
             //extractedV5(em);
-            entityMapping(em);
+            //entityMapping(em);
+            entityTestV1(em);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -37,11 +38,20 @@ public class JpaMain {
         emf.close();
     }
 
+    private static void entityTestV1(EntityManager em) {
+        BMember member = new BMember();
+        member.setId(3L);
+        member.setUsername("C");
+        member.setRoleType(RoleType.GUEST);
+
+        em.persist(member);
+    }
+
     // 엔티티 매핑
     private static void entityMapping(EntityManager em) {
 
         BMember member = em.find(BMember.class, 150L);
-        member.setName("A2222AAAA");
+        //member.setName("A2222AAAA");
     }
 
     // 준영속
@@ -49,7 +59,7 @@ public class JpaMain {
 
         // 영속
         BMember member = em.find(BMember.class, 150L);
-        member.setName("A2222AAAA");
+        //member.setName("A2222AAAA");
 
         // 준영속
         // em.detach(member);
@@ -61,7 +71,7 @@ public class JpaMain {
     }
 
     private static void extractedV4(EntityManager em) {
-        BMember memberA = new BMember(300L, "memberA");
+/*        BMember memberA = new BMember(300L, "memberA");
         BMember memberB = new BMember(301L, "memberB");
         BMember memberC = new BMember(302L, "memberC");
 
@@ -74,7 +84,7 @@ public class JpaMain {
         for (BMember member : resultList) {
             System.out.println("member.id = " + member.getId());
             System.out.println("member.name = " + member.getName());
-        }
+        }*/
     }
 
     // 변경 감지 (Dirty Checking)
@@ -86,7 +96,7 @@ public class JpaMain {
     private static void extractedV3(EntityManager em) {
         //BMember member = em.find(BMember.class, 150L);
         //member.setName("AAAAA");
-        BMember member = new BMember(202L, "member200");
+/*        BMember member = new BMember(202L, "member200");
         em.persist(member);
         em.flush();
 
@@ -95,16 +105,16 @@ public class JpaMain {
         System.out.println("findMember.id = " + findMember.getId());
         System.out.println("findMember.name = " + findMember.getName());
 
-        System.out.println("===================");
+        System.out.println("===================");*/
     }
 
     // 트랜잭션을 지원하는 쓰기 지연
     private static void extractedV2(EntityManager em) {
-        BMember member1 = new BMember(150L, "A");
+/*        BMember member1 = new BMember(150L, "A");
         BMember member2 = new BMember(160L, "B");
         em.persist(member1);
         em.persist(member2);
-        System.out.println("===================");
+        System.out.println("===================");*/
     }
 
     // 1차 캐시, 동일성 보장
