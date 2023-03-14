@@ -40,9 +40,8 @@ public class JpaMain {
 
     private static void entityTestV1(EntityManager em) {
         BMember member = new BMember();
-        member.setId(3L);
+        //member.setId("ID_A");
         member.setUsername("C");
-        member.setRoleType(RoleType.GUEST);
 
         em.persist(member);
     }
