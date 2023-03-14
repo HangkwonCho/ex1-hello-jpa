@@ -43,10 +43,11 @@ public class JpaMain {
         //member.setId("ID_A");
         member.setUsername("C");
 
+        System.out.println("=====================");
         em.persist(member);
         System.out.println("member.id = " + member.getId());
-        em.clear();
         System.out.println("=====================");
+        em.clear();
     }
 
     // 엔티티 매핑
