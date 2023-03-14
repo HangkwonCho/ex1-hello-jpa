@@ -39,15 +39,25 @@ public class JpaMain {
     }
 
     private static void entityTestV1(EntityManager em) {
-        BMember member = new BMember();
-        //member.setId("ID_A");
-        member.setUsername("C");
+        BMember memberA = new BMember();
+        memberA.setUsername("A");
+
+        BMember memberB = new BMember();
+        memberB.setUsername("B");
+
+        BMember memberC = new BMember();
+        memberC.setUsername("C");
+
 
         System.out.println("=====================");
-        em.persist(member);
-        System.out.println("member.id = " + member.getId());
+        em.persist(memberA);
+        em.persist(memberB);
+        em.persist(memberC);
+        System.out.println("memberA.id = " + memberA.getId());
+        System.out.println("memberB.id = " + memberB.getId());
+        System.out.println("memberC.id = " + memberC.getId());
         System.out.println("=====================");
-        em.clear();
+        //em.clear();
     }
 
     // 엔티티 매핑
