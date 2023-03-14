@@ -44,6 +44,9 @@ public class JpaMain {
         member.setUsername("C");
 
         em.persist(member);
+        System.out.println("member.id = " + member.getId());
+        em.clear();
+        System.out.println("=====================");
     }
 
     // 엔티티 매핑
