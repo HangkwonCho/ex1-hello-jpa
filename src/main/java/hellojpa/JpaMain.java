@@ -1,7 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.util.List;
 
 public class JpaMain {
@@ -28,7 +27,14 @@ public class JpaMain {
             //extractedV4(em);
             //extractedV5(em);
             //entityMapping(em);
-            entityTestV1(em);
+            //entityTestV1(em);
+
+            //단방향
+            //extractedTeamV1(em);
+
+            //양방향 연관관계와 연관관계의 주인
+            extractedBiDirectionalAssociation(em);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -36,6 +42,49 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void extractedBiDirectionalAssociation(EntityManager em) {
+        Team team = new Team();
+        team.setName("TeamA");
+        em.persist(team);
+
+        Member member = new Member();
+        member.setUsername("member1");
+        member.setTeam(team);   // 단방향 연관관계 설정. 참조 저장
+        em.persist(member);
+
+        em.flush();
+        em.clear();
+
+        Member findMember = em.find(Member.class, member.getId());
+        List<Member> members = findMember.getTeam().getMembers();
+        for (Member m : members) {
+            System.out.println("m.getUsername() = " + m.getUsername());
+        }
+    }
+
+    private static void extractedTeamV1(EntityManager em) {
+        Team team = new Team();
+        team.setName("TeamA");
+        em.persist(team);
+
+        Member member = new Member();
+        member.setUsername("member1");
+        member.setTeam(team);   // 단방향 연관관계 설정. 참조 저장
+        em.persist(member);
+
+        em.flush();
+        em.clear();
+
+        Member findMember = em.find(Member.class, member.getId());
+        System.out.println("findMember = " + findMember.getUsername());
+        Team findTeam = findMember.getTeam();
+        System.out.println("findTeam = " + findTeam.getName());
+
+//        Member member = em.find(Member.class, 2L);
+//        Team newTeam = em.find(Team.class, 3L);
+//        member.setTeam(newTeam);
     }
 
     private static void entityTestV1(EntityManager em) {
