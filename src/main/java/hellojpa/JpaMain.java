@@ -33,7 +33,9 @@ public class JpaMain {
             //extractedTeamV1(em);
 
             //양방향 연관관계와 연관관계의 주인
-            extractedBiDirectionalAssociation(em);
+            //extractedBiDirectionalAssociationV1(em);
+            //extractedBiDirectionalAssociationV2(em);
+            extractedBiDirectionalAssociationV3(em);
 
             tx.commit();
         } catch (Exception e) {
@@ -44,14 +46,70 @@ public class JpaMain {
         emf.close();
     }
 
-    private static void extractedBiDirectionalAssociation(EntityManager em) {
+    private static void extractedBiDirectionalAssociationV3(EntityManager em) {
         Team team = new Team();
         team.setName("TeamA");
         em.persist(team);
 
         Member member = new Member();
         member.setUsername("member1");
-        member.setTeam(team);   // 단방향 연관관계 설정. 참조 저장
+        //member.changeTeam(team);
+        em.persist(member);
+
+        team.addMember(member);
+
+        // 역방향(주인이 아닌 방향)만 연관관계 설정 - 아래는 적용안됨
+        // team.getMembers().add(member);
+
+        em.flush();
+        em.clear();
+
+        Team findTeam = em.find(Team.class, team.getId());
+        List<Member> members = findTeam.getMembers();
+
+        System.out.println("============= start");
+        //System.out.println("member = " + findTeam);
+        System.out.println("============= end");
+
+    }
+
+    private static void extractedBiDirectionalAssociationV2(EntityManager em) {
+        Team team = new Team();
+        team.setName("TeamA");
+        em.persist(team);
+
+        Member member = new Member();
+        member.setUsername("member1");
+        member.changeTeam(team);
+        em.persist(member);
+
+        // 역방향(주인이 아닌 방향)만 연관관계 설정 - 아래는 적용안됨
+        // team.getMembers().add(member);
+
+        em.flush();
+        em.clear();
+
+        Team findTeam = em.find(Team.class, team.getId());
+        System.out.println("findTeam = " + findTeam.getMembers());
+        List<Member> members = findTeam.getMembers();
+
+        System.out.println("============= start");
+        for (Member m : members) {
+            System.out.println("------------------");
+            System.out.println("m = " + m.getId());
+        }
+        System.out.println("============= end");
+
+    }
+
+    private static void extractedBiDirectionalAssociationV1(EntityManager em) {
+        Team team = new Team();
+        team.setName("TeamA");
+        em.persist(team);
+
+        Member member = new Member();
+        member.setUsername("member1");
+        member.changeTeam(team);   // 단방향 연관관계 설정. 참조 저장
         em.persist(member);
 
         em.flush();
@@ -71,7 +129,7 @@ public class JpaMain {
 
         Member member = new Member();
         member.setUsername("member1");
-        member.setTeam(team);   // 단방향 연관관계 설정. 참조 저장
+        member.changeTeam(team);   // 단방향 연관관계 설정. 참조 저장
         em.persist(member);
 
         em.flush();
